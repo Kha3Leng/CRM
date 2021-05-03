@@ -7,16 +7,17 @@
 
 <body>
     <div class="menu">
-        <a href="#" class="logo">
+
+        <?php 
+            $currentPage= $_SERVER['SCRIPT_NAME'];
+            $current_file = end(explode('/', $currentPage));
+        ?>
+        <a href="<?php echo SITEURL; ?>" class="logo <?php echo ($current_file == 'index.php')? "active": '';?>">
             <img src="images/logo.jpg" alt="Leang CRM"/>
-            <h1 class="text-center">Learg CRM</h1>
+            <h2 class="text-center">Learg CRM</h2>
         </a>
         <navbar>
             <ul>
-                <?php 
-                    $currentPage= $_SERVER['SCRIPT_NAME'];
-                    $current_file = end(explode('/', $currentPage));
-                ?>
                 <li><a href="<?php echo SITEURL; ?>lead.php" class="<?php echo ($current_file == 'lead.php')? "active": ''; ?>">Lead</a></li>
                 <li><a href="<?php echo SITEURL; ?>customer.php" class="<?php echo ($current_file == 'customer.php')? "active": ''; ?>">Customers</a></li>
                 <li><a href="<?php echo SITEURL; ?>vendor.php" class="<?php echo ($current_file == 'vendor.php')? "active": ''; ?>">Vendor</a></li>
