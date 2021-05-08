@@ -3,6 +3,8 @@
 <head>
     <title>CRM K</title>
     <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
 </head>
 
 <body>
@@ -13,8 +15,8 @@
             $current_file = end(explode('/', $currentPage));
         ?>
         <a href="<?php echo SITEURL; ?>" class="logo <?php echo ($current_file == 'index.php')? "active": '';?>">
-            <img src="images/logo.jpg" alt="Leang CRM"/>
-            <h2 class="text-center">Learg CRM</h2>
+            <img src="images/logo1.jpg" alt="Leang CRM"/>
+            <h2 class="text-center head">Leang CRM</h2>
         </a>
         <navbar>
             <ul>

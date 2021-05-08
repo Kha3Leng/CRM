@@ -20,6 +20,10 @@
     border-bottom: 1px solid #747d8c;
 }
 
+.head{
+    font-family: "Sofia", sans-serif;
+}
+
 .logo img{
     width: 80%;
     max-height: 100px;
@@ -61,13 +65,13 @@ a{
 }
 
 .menu ul a.active{
-    background-color: #2ed573;
+    background-color: #78e08f;
 }
 
 .menu ul a:hover{
     text-decoration: none;
     color: #2f3542;
-    background-color: #2ed573;
+    background-color: #78e08f;
 }
 
 .footer{
@@ -191,4 +195,19 @@ a{
 .success{
     color: #2ed573;
     font-size: 18px;
+}
+
+.top{
+    margin-top: 30px;
+}
+
+.lead-card{
+    background-color: white;
+    width: 350px;
+    height: 150px;
+    float: left;
+    margin: 30px 10px;
+    padding: 4%;
+    font-size: 24px;
+    font-weight: bold;
 }
