@@ -4,13 +4,13 @@
 
 <div class="main-content">
     <div class="wrapper">
-        <h1>Customer Detail</h1>
+        <h1>Partner Detail</h1>
         <br/><br/>
-        <a href="<?php echo SITEURL; ?>add-partner.php" class="btn-primary">CREATE</a>
+        <a href="<?php echo SITEURL; ?>add-partner.php?id" class="btn-primary">CREATE</a>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="#" class="btn-primary">EDIT</a>
+        <a href="<?php echo SITEURL; ?>edit-partner.php?id=<?php echo $_GET['id']; ?>" class="btn-primary">EDIT</a>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="#" class="btn-primary">DELETE</a>
+        <a href="<?php echo SITEURL; ?>delete-partner.php?id=<?php echo $_GET['id']; ?>" class="btn-primary">DELETE</a>
         <br/>
         <hr/>
         <?php
@@ -32,7 +32,6 @@
                     }
                 }
             }else{
-                $_SESSION['no_customer'] = '<div class="fail">No Customers</div>';
                 header('location:'.SITEURL.'customer.php');
             }
         ?>

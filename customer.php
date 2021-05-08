@@ -20,7 +20,7 @@
             <div class="data-block">
             
             <?php 
-                $sql = "SELECT * FROM partner ";
+                $sql = "SELECT * FROM partner WHERE customer = 'customer'";
                 $res = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($res);
 
@@ -32,12 +32,12 @@
                         $address = $rec['address'];
                         $phone = $rec['phone'];
                         ?>
-                        <a  href ="<?php echo SITEURL; ?>customer-detail.php?id=<?php echo $id; ?>">
+                        <a  href ="<?php echo SITEURL; ?>partner-detail.php?id=<?php echo $id; ?>">
                             <div class="customer-card">
                             <?php 
                                 if($pic_name != ''){
                             ?>
-                                <img src="<?php echo SITEURL; ?>images/customer_photo/<?php echo $pic_name;?>"/>
+                                <img src="<?php echo SITEURL; ?>images/customer_photo/<?php echo $pic_name;?>" alt="No Image" width="100px" height="100px"/>
                                 <?php
                                 }else{
                                     echo "<img alt='No Image' width='100px' height='100px'/>";

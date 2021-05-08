@@ -97,7 +97,7 @@
         $id = mysqli_insert_id($conn);
         if ($res == true){
             $_SESSION['add_partner'] = "<div class='success'>Create a new parnter successfully</div>";
-            header("location:".SITEURL.'customer-detail.php?id='.$id);
+            header("location:".SITEURL.'partner-detail.php?id='.$id);
         }else{
             $_SESSION['add_partner'] = "<div class='fail'>Create a new parnter Failed</div>";
             header("location:".SITEURL);
