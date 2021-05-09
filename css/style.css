@@ -132,6 +132,17 @@ a{
 
 .tbl-full{
     width: 100%;
+
+}
+
+.tbl-full *{
+    padding: 2%;
+    border-bottom: 1px solid grey;
+    text-align: left;
+}
+
+.tbl-full tr:hover{
+    cursor: pointer;
 }
 
 
