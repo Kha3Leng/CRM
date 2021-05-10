@@ -210,10 +210,10 @@ ob_start();
             $price = $hello[$i]['price'];
             $qty_available = $hello[$i]['qty'];
             $qty_ordered = $qty[$i];
-            $total_amount += $qty_ordered * $price;
+            $total_amount += ($qty_ordered * $price);
             $sql2 = "INSERT INTO sol
                     (order_id, ordered_qty, total, state, product_id, price)
-                    VALUES($id, $qty_ordered, $total_amount, 'draft', $products[$i], $price)";
+                    VALUES($id, $qty_ordered, $qty_ordered * $price, 'draft', $products[$i], $price)";
             $res2 = mysqli_query($conn, $sql2);
         }
         echo var_dump($res2);
@@ -229,7 +229,7 @@ ob_start();
             // echo $_SESSION['add_product'];
             // header("location:".SITEURL.'sale_order.php', true, 301);
             // echo "hello";
-            echo "<script type='text/javascript'>window.location.href = 'http://192.168.64.2/crm/sale_order.php';</script>";
+            echo "<script type='text/javascript'>window.location.href = 'http://192.168.64.2/crm/so-detail.php?id=".$id."';</script>";
             exit();
             // echo "<script type='text/javascript'>window.top.location=".SITEURL.";</script>"; 
             // exit;

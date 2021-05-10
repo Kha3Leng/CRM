@@ -4,7 +4,7 @@
 
 <div class="main-content">
     <div class="wrapper">
-        <h1>Product Detail</h1>
+        <h1>Sale Order</h1>
         <br/><br/>
         <a href="<?php echo SITEURL; ?>add-so.php" class="btn-primary">CREATE</a>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -67,5 +67,43 @@
                 <input readonly type="text" name="state" value='<?php echo $state;?>'/>
             </div>
         </div>
+        <div class="clear-fix"></div>
+        <hr/>
+        <table class="tbl-full">
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+            <?php
+                $sql1 = "SELECT s.*, p.name as product_name FROM sol as s, product as p WHERE order_id = $id and p.id = s.product_id";
+                // echo $sql1;
+                $res1 = mysqli_query($conn, $sql1);
+                $count = mysqli_num_rows($res1);
+
+                if ($count > 0){
+                    while($rec = mysqli_fetch_assoc($res1)){
+                        $sol_id = $rec['id'];
+                        $qty = $rec['ordered_qty'];
+                        $total = $rec['total'];
+                        $product_id = $rec['product_id'];
+                        $price = $rec['price'];
+                        $product_name = $rec['product_name'];
+                        ?>
+                        <tr>
+                            <td><?php echo $sol_id; ?></td>
+                            <td><?php echo $product_name; ?></td>
+                            <td><?php echo number_format($price); ?></td>
+                            <td><?php echo $qty; ?></td>
+                            <td><?php echo number_format($total); ?></td>
+                        </tr>
+                        <?php
+
+                    }
+                }
+            ?>
+        </table>
     </div>
 </div>
