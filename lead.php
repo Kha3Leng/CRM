@@ -32,13 +32,13 @@
                 ?>
             </a>
 
-            <a href="<?php echo SITEURL; ?>customer.php" class="lead-card text-center">
-                Customer<br/>
+            <a href="<?php echo SITEURL; ?>sale_order.php" class="lead-card text-center">
+                Sale Order<br/>
                 <?php
-                    $sql = "SELECT count(*) as countc FROM partner WHERE customer='customer'";
-                    $res = mysqli_query($conn, $sql);
-                    $count = mysqli_fetch_assoc($res)['countc'];
-                    echo $count;
+                    $sql3 = "SELECT count(*) as counts FROM so";
+                    $res3 = mysqli_query($conn, $sql3);
+                    $count3 = mysqli_fetch_assoc($res3)['counts'];
+                    echo $count3;
                 ?>
             </a>
 

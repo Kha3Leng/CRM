@@ -25,7 +25,7 @@
                 </tr>
             
                 <?php 
-                    $sql = "SELECT s.*, p.name as customer_name FROM so as s inner join partner as p on p.id = s.customer_id";
+                    $sql = "SELECT s.*, p.name as customer_name, p.address FROM so as s inner join partner as p on p.id = s.customer_id";
                     $res = mysqli_query($conn, $sql);
                     $count = mysqli_num_rows($res);
 
@@ -37,7 +37,6 @@
                             $id = $rec['id'];
                             $name = $rec['name'];
                             $total = $rec['total'];
-
                             $tax = $rec['tax'];
                             $terms = $rec['terms'];
                             $state = $rec['state'];

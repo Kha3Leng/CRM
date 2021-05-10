@@ -145,6 +145,10 @@ a{
     cursor: pointer;
 }
 
+#handler{
+    width: 10px;
+}
+
 
 .customer-card{
     position: relative;
@@ -171,7 +175,6 @@ a{
 }
 
 .clear-fix{
-    border: 1px solid black;
     clear:both;
 }
 
