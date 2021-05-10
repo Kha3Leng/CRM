@@ -28,6 +28,7 @@ if(!isset($GLOBALS['sequence'])){
 			var cell2 = row.insertCell(1);
             var element2 = document.createElement("select");
             element2.setAttribute("id", "product");
+            element2.name = "product[]";
             element2.setAttribute("onchange", "unit_price();");
             <?php
                 $query = "SELECT * from product";
@@ -59,23 +60,23 @@ if(!isset($GLOBALS['sequence'])){
 			var element3 = document.createElement("input");
             element3.setAttribute('id', 'price');
 			element3.type = "number";
-			element3.name = "txtbox[]";
-
+			element3.name = "price[]";
+            element3.readOnly = true;
 			cell3.appendChild(element3);
 
             var cell4 = row.insertCell(3);
 			var element4 = document.createElement("input");
             element4.setAttribute('id', 'qty');
 			element4.type = "number";
-			element4.name = "txtbox[]";
+			element4.name = "qty[]";
 			cell4.appendChild(element4);
 
             var cell5 = row.insertCell(4);
 			var element5 = document.createElement("input");
             element5.setAttribute('id', 'total');
 			element5.type = "number";
-            element5.readonly = true;
-			element5.name = "txtbox[]";
+            element5.readOnly = true;
+			element5.name = "total[]";
 			cell5.appendChild(element5);
 
 		}
@@ -92,9 +93,7 @@ if(!isset($GLOBALS['sequence'])){
 					table.deleteRow(i);
 					rowCount--;
 					i--;
-				}
-
-
+                }
 			}
 			}catch(e) {
 				alert(e);
@@ -173,10 +172,11 @@ if(!isset($GLOBALS['sequence'])){
             </table>
 </form>
 <?php
+error_reporting(E_ALL);
+ob_start();
     if(isset($_POST['submit'])){
-        echo $terms =$_POST['terms'];
-        echo $tax = $_POST['tax'];
-
+        $terms =$_POST['terms'];
+        $tax = $_POST['tax'];
         if (isset($_POST['customer_id'])){
             $customer_id = $_POST['customer_id'];
         }else{
@@ -184,7 +184,6 @@ if(!isset($GLOBALS['sequence'])){
             header("location:".SITEURL."add-so.php");
         }
 
-        
         $name = 'SO0000'.$GLOBALS['sequence'];
         $GLOBALS['sequence'] += 1; 
 
@@ -194,17 +193,50 @@ if(!isset($GLOBALS['sequence'])){
         $res = mysqli_query($conn, $sql);
         $id = mysqli_insert_id($conn);
 
-        if ($res == true){
+        function get_price(int $id){
+            global $conn;
+            $sql1 = "SELECT price, qty from product where id = $id limit 1";
+            $res1 = mysqli_query($conn, $sql1);
+            return mysqli_fetch_assoc($res1);
+        }
+
+        $products = $_POST['product'];
+        $qty = $_POST['qty'];
+        $length = count($products);
+        $total_amount = 0;
+
+        for($i = 0; $i < $length; $i++){
+            $hello[] = get_price($products[$i]);
+            $price = $hello[$i]['price'];
+            $qty_available = $hello[$i]['qty'];
+            $qty_ordered = $qty[$i];
+            $total_amount += $qty_ordered * $price;
+            $sql2 = "INSERT INTO sol
+                    (order_id, ordered_qty, total, state, product_id, price)
+                    VALUES($id, $qty_ordered, $total_amount, 'draft', $products[$i], $price)";
+            $res2 = mysqli_query($conn, $sql2);
+        }
+        echo var_dump($res2);
+
+        $sql3 = "UPDATE so SET
+                total = $total_amount
+                WHERE id = $id";
+        echo $sql3;
+        $res3 = mysqli_query($conn, $sql3);
+        echo var_dump($res3);
+        if ($res3 == true){
             $_SESSION['add_product'] = "<div class='success'>Create a new product successfully</div>";
-            header("location:".SITEURL.'sale_order.php');
+            // echo $_SESSION['add_product'];
+            // header("location:".SITEURL.'sale_order.php', true, 301);
+            // echo "hello";
+            echo "<script type='text/javascript'>window.location.href = 'http://192.168.64.2/crm/sale_order.php';</script>";
+            exit();
+            // echo "<script type='text/javascript'>window.top.location=".SITEURL.";</script>"; 
+            // exit;
         }else{
             $_SESSION['add_product'] = "<div class='fail'>Create a new parnter Failed</div>";
             header("location:".SITEURL.'product.php');
+            die();
         }
-
-
-
-    }
-?>
-</div>
+    }?></div>
 </div>
